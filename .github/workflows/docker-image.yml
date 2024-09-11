@@ -37,11 +37,15 @@ jobs:
         echo "${{ secrets.KUBECONFIG }}" > kubeconfig
         export KUBECONFIG=$(pwd)/kubeconfig
 
+    # Explicitly set the current Kubernetes context
+    - name: Set the Kubernetes context
+      run: kubectl config use-context do-nyc1-k8s-cloudfi
+
     # Debug: Print the KUBECONFIG environment variable to confirm it’s set
     - name: Print KUBECONFIG environment variable
       run: echo $KUBECONFIG
 
-    # Debug: Check if kubectl context is being set
+    # Debug: Check if kubectl context is set
     - name: Check Kubernetes context
       run: kubectl config current-context
 
