@@ -46,14 +46,16 @@ jobs:
         chmod +x ./kubectl
         sudo mv ./kubectl /usr/local/bin/kubectl
 
-    - name: Set up KUBECONFIG
-      env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    - name: Set up KUBECONFIG from secret
       run: |
         echo "${{ secrets.KUBECONFIG }}" > kubeconfig
         export KUBECONFIG=$(pwd)/kubeconfig
 
-    # Step 7: Update the image in your Kubernetes deployment and apply it
+    # Step 7: Set the correct Kubernetes context explicitly
+    - name: Set the Kubernetes context
+      run: kubectl config use-context do-nyc1-k8s-cloudfi
+
+    # Step 8: Update the image in your Kubernetes deployment and apply it
     - name: Update and deploy to Kubernetes
       run: |
         kubectl set image deployment/my-nginx-app my-nginx-app=jakehazex21/my-nginx-app:latest --record
