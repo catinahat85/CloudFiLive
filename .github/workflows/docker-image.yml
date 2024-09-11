@@ -41,18 +41,20 @@ jobs:
     - name: Print KUBECONFIG contents
       run: cat kubeconfig
 
-    # List Kubernetes contexts to confirm KUBECONFIG is working
+    # List Kubernetes contexts to confirm the correct context is available
     - name: List Kubernetes contexts
       run: kubectl config get-contexts
 
-    # Explicitly set the context
-    - name: Explicitly set Kubernetes context
+    # Dynamically set the correct context if found
+    - name: Dynamically set Kubernetes context
       run: |
-        kubectl config use-context do-nyc1-k8s-cloudfi
-
-    # Show the current Kubernetes context
-    - name: Show current Kubernetes context
-      run: kubectl config current-context
+        CONTEXT_NAME=$(kubectl config get-contexts -o name | grep "do-nyc1-k8s-cloudfi" || echo "not_found")
+        if [ "$CONTEXT_NAME" = "not_found" ]; then
+          echo "Context not found. Exiting."
+          exit 1
+        else
+          kubectl config use-context $CONTEXT_NAME
+        fi
 
     # Test Kubernetes connection
     - name: Test Kubernetes connection
