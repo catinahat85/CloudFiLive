@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}  # Set KUBECONFIG globally for all steps
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -31,15 +34,9 @@ jobs:
         push: true
         tags: jakehazex21/my-nginx-app:latest
 
-    # Create KUBECONFIG file from secret and set it
-    - name: Set up KUBECONFIG from secret
-      run: |
-        echo "${{ secrets.KUBECONFIG }}" > kubeconfig
-        export KUBECONFIG=$(pwd)/kubeconfig
-
     # Debug: Print the contents of KUBECONFIG to verify it is correct
     - name: Print KUBECONFIG contents
-      run: cat kubeconfig
+      run: echo "${{ env.KUBECONFIG }}" > kubeconfig && cat kubeconfig
 
     # List available contexts to check for issues
     - name: List available Kubernetes contexts
