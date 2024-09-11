@@ -34,6 +34,12 @@ jobs:
       with:
         version: 'v1.30.0'  # Or the version that matches your K8s cluster
 
+    - name: Apply Kubeconfig
+      run: |
+        mkdir -p $HOME/.kube  # Create the .kube directory if it doesn't exist
+        echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config  # Write Kubeconfig to the file
+        kubectl config set-context --current --namespace=default  # Set your desired namespace if needed
+
     - name: Deploy to Kubernetes
       run: |
         echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config  # Use the Kubeconfig from secrets
