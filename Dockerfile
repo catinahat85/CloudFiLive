@@ -4,13 +4,13 @@ FROM nginx:alpine
 # Set the working directory inside the container
 WORKDIR /usr/share/nginx/html
 
-# Install git and any other necessary packages
+# Install git and bash
 RUN apk add --no-cache git bash
 
-# Clone only the latest version of the repository using depth=1 for efficiency
-RUN git clone --depth 1 https://github.com/catinahat85/CloudFiLive.git /usr/share/nginx/html
+# Retry cloning up to 5 times in case of failure
+RUN for i in $(seq 1 5); do git clone --depth 1 https://github.com/catinahat85/CloudFiLive.git /usr/share/nginx/html && break || sleep 5; done
 
-# Expose port 80 (Kubernetes will handle port 443 via Ingress)
+# Expose port 80
 EXPOSE 80
 
 # Start NGINX
