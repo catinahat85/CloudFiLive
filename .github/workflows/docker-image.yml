@@ -50,8 +50,8 @@ jobs:
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
       run: |
-        echo "$KUBECONFIG" > kubeconfig
-        export KUBECONFIG=$(pwd)/kubeconfig
+        echo "$KUBECONFIG" > kubeconfig.yaml
+        export KUBECONFIG=$(pwd)/kubeconfig.yaml
 
     # Step 7: Update the image in your Kubernetes deployment and apply it
     - name: Update and deploy to Kubernetes
