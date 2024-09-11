@@ -50,7 +50,7 @@ jobs:
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
       run: |
-        echo "$KUBECONFIG" | base64 --decode > kubeconfig
+        echo "$KUBECONFIG" > kubeconfig
         export KUBECONFIG=$(pwd)/kubeconfig
 
     # Step 7: Update the image in your Kubernetes deployment and apply it
