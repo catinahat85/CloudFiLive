@@ -31,18 +31,18 @@ jobs:
         push: true
         tags: jakehazex21/my-nginx-app:latest
 
-    # Create KUBECONFIG file from plain text secret
-    - name: Set up KUBECONFIG from secret
+    # Create the KUBECONFIG file from secret
+    - name: Create KUBECONFIG file
       run: |
         echo "${{ secrets.KUBECONFIG }}" > kubeconfig
         export KUBECONFIG=$(pwd)/kubeconfig
 
-    # Debug: Print the contents of KUBECONFIG to verify it is correct
+    # Debug: Print the KUBECONFIG contents to verify it's correct
     - name: Print KUBECONFIG contents
       run: cat kubeconfig
 
-    # List available contexts to check for issues
-    - name: List available Kubernetes contexts
+    # List available contexts to confirm KUBECONFIG is working
+    - name: List Kubernetes contexts
       run: kubectl config get-contexts
 
     # Dynamically set the context if found
