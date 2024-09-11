@@ -39,7 +39,23 @@ jobs:
     - name: Log out from Docker Hub
       run: docker logout
 
+    # Step 6: Set up kubectl and configure Kubernetes access using KUBECONFIG secret
+    - name: Set up kubectl
+      run: |
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
 
-    # Step 5: Log out from Docker Hub
-    - name: Log out from Docker Hub
-      run: docker logout
+    - name: Set up KUBECONFIG
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      run: |
+        echo "$KUBECONFIG" | base64 --decode > kubeconfig
+        export KUBECONFIG=$(pwd)/kubeconfig
+
+    # Step 7: Update the image in your Kubernetes deployment and apply it
+    - name: Update and deploy to Kubernetes
+      run: |
+        kubectl set image deployment/my-nginx-app my-nginx-app=jakehazex21/my-nginx-app:latest --record
+        kubectl rollout status deployment/my-nginx-app
+
