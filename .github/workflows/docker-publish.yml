@@ -36,6 +36,8 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl set image deployment/static-site static-site=jakehazex21/my-nginx-app:latest
+        echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config  # Use the Kubeconfig from secrets
+        kubectl config set-context --current --namespace=default  
+
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}  # Your Kubernetes config for authentication
