@@ -1,16 +1,16 @@
-# Use an official NGINX image as the base image
+# Use an official NGINX image from DockerHub as the base
 FROM nginx:alpine
 
-# Set working directory for the static site
+# Set the working directory inside the container
 WORKDIR /usr/share/nginx/html
 
-# Install git to clone the repository
-RUN apk add --no-cache git
+# Install git and any other necessary packages
+RUN apk add --no-cache git bash
 
-# Clone the static site from your GitHub repository
-RUN git clone https://github.com/catinahat85/CloudFiLive.git /usr/share/nginx/html
+# Clone only the latest version of the repository using depth=1 for efficiency
+RUN git clone --depth 1 https://github.com/catinahat85/CloudFiLive.git /usr/share/nginx/html
 
-# Expose port 80 for HTTP (SSL is handled at the Kubernetes ingress level)
+# Expose port 80 (Kubernetes will handle port 443 via Ingress)
 EXPOSE 80
 
 # Start NGINX
