@@ -32,7 +32,7 @@ jobs:
     - name: Set up Kubectl
       uses: azure/setup-kubectl@v3
       with:
-        version: 'v1.31'  # Or the version that matches your K8s cluster
+        version: 'v1.30.0'  # Or the version that matches your K8s cluster
 
     - name: Deploy to Kubernetes
       run: |
