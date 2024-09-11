@@ -31,8 +31,8 @@ jobs:
         push: true
         tags: jakehazex21/my-nginx-app:latest
 
-    # Create the KUBECONFIG file from secret
-    - name: Create KUBECONFIG file
+    # Create the KUBECONFIG file from the secret and set it up for kubectl
+    - name: Create KUBECONFIG file from secret
       run: |
         echo "${{ secrets.KUBECONFIG }}" > kubeconfig
         export KUBECONFIG=$(pwd)/kubeconfig
@@ -41,7 +41,7 @@ jobs:
     - name: Print KUBECONFIG contents
       run: cat kubeconfig
 
-    # List available contexts to confirm KUBECONFIG is working
+    # List Kubernetes contexts to confirm KUBECONFIG is working
     - name: List Kubernetes contexts
       run: kubectl config get-contexts
 
@@ -65,3 +65,4 @@ jobs:
       run: |
         kubectl set image deployment/my-nginx-app my-nginx-app=jakehazex21/my-nginx-app:latest
         kubectl rollout status deployment/my-nginx-app
+
