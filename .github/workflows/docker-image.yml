@@ -31,10 +31,10 @@ jobs:
         push: true
         tags: jakehazex21/my-nginx-app:latest
 
-    # Create the KUBECONFIG file from the secret and set it up for kubectl
-    - name: Create KUBECONFIG file from secret
+    # Decode the base64 KUBECONFIG and set it up for kubectl
+    - name: Decode and create KUBECONFIG file
       run: |
-        echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig
         export KUBECONFIG=$(pwd)/kubeconfig
 
     # Debug: Print the KUBECONFIG contents to verify it's correct
@@ -45,10 +45,21 @@ jobs:
     - name: List Kubernetes contexts
       run: kubectl config get-contexts
 
-    # Debug: Show the current Kubernetes context
+    # Explicitly set the context
+    - name: Explicitly set Kubernetes context
+      run: |
+        kubectl config use-context do-nyc1-k8s-cloudfi
+
+    # Show the current Kubernetes context
     - name: Show current Kubernetes context
       run: kubectl config current-context
 
     # Test Kubernetes connection
     - name: Test Kubernetes connection
       run: kubectl get nodes
+
+    # Update the image in your Kubernetes deployment
+    - name: Update and deploy to Kubernetes
+      run: |
+        kubectl set image deployment/my-nginx-app my-nginx-app:jakehazex21/my-nginx-app:latest
+        kubectl rollout status deployment/my-nginx-app
