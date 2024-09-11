@@ -45,24 +45,10 @@ jobs:
     - name: List Kubernetes contexts
       run: kubectl config get-contexts
 
-    # Dynamically set the context if found
-    - name: Dynamically set Kubernetes context
-      run: |
-        CONTEXT_NAME=$(kubectl config get-contexts -o name | grep "do-nyc1-k8s-cloudfi" || echo "not_found")
-        if [ "$CONTEXT_NAME" = "not_found" ]; then
-          echo "Context not found. Exiting."
-          exit 1
-        else
-          kubectl config use-context $CONTEXT_NAME
-        fi
+    # Debug: Show the current Kubernetes context
+    - name: Show current Kubernetes context
+      run: kubectl config current-context
 
     # Test Kubernetes connection
     - name: Test Kubernetes connection
       run: kubectl get nodes
-
-    # Update the image in your Kubernetes deployment
-    - name: Update and deploy to Kubernetes
-      run: |
-        kubectl set image deployment/my-nginx-app my-nginx-app=jakehazex21/my-nginx-app:latest
-        kubectl rollout status deployment/my-nginx-app
-
