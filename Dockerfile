@@ -1,4 +1,3 @@
-  GNU nano 6.2                                                                    Dockerfile                                                                              
 # Use the official Nginx image to serve the static site
 FROM nginx:alpine
 
