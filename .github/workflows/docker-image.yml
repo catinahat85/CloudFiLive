@@ -51,13 +51,20 @@ jobs:
         echo "${{ secrets.KUBECONFIG }}" > kubeconfig
         export KUBECONFIG=$(pwd)/kubeconfig
 
-    # Step 7: Set the correct Kubernetes context explicitly
-    - name: Set the Kubernetes context
-      run: kubectl config use-context do-nyc1-k8s-cloudfi
+    # Print the available contexts to verify the correct one
+    - name: Check available Kubernetes contexts
+      run: kubectl config get-contexts
 
-    # Step 8: Update the image in your Kubernetes deployment and apply it
+    # Debugging Steps
+    - name: Print KUBECONFIG
+      run: cat kubeconfig
+
+    # Test Kubernetes connection
+    - name: Test Kubernetes connection
+      run: kubectl get nodes
+
+    # Update the image in your Kubernetes deployment
     - name: Update and deploy to Kubernetes
       run: |
-        kubectl set image deployment/my-nginx-app my-nginx-app=jakehazex21/my-nginx-app:latest --record
+        kubectl set image deployment/my-nginx-app my-nginx-app=jakehazex21/my-nginx-app:latest
         kubectl rollout status deployment/my-nginx-app
-
