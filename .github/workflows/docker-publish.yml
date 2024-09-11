@@ -1,9 +1,9 @@
-name: Build and Push Docker Image
+name: Build, Push Docker Image, and Deploy to Kubernetes
 
 on:
   push:
     branches:
-      - main  # Trigger on push to main branch
+      - main  # Trigger on push to the main branch
 
 jobs:
   build:
@@ -28,3 +28,14 @@ jobs:
         context: .
         push: true
         tags: jakehazex21/my-nginx-app:latest
+
+    - name: Set up Kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.31'  # Or the version that matches your K8s cluster
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl set image deployment/static-site static-site=jakehazex21/my-nginx-app:latest
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}  # Your Kubernetes config for authentication
