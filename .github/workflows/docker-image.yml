@@ -35,6 +35,11 @@ jobs:
         push: true
         tags: jakehazex21/my-nginx-app:latest  # Replace with your Docker Hub image tag
 
+    - name: Build and push SWAG container
+      run: |
+        docker build -t jakehazex21/swag ./swag-config
+        docker push jakehazex21/swag
+
     # Step 5: Log out from Docker Hub
     - name: Log out from Docker Hub
       run: docker logout
