@@ -6,8 +6,8 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=501
+      - PGID=20
       - TZ=America/New_York  # Change to your timezone
       - URL=beatsinthe.cloud   # Change to your domain
       - SUBDOMAINS=www
