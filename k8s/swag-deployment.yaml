@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swag
+  template:
+    metadata:
+      labels:
+        app: swag
+    spec:
+      containers:
+      - name: swag
+        image: jakehazex21/swag:latest  # Your DockerHub SWAG image
+        ports:
+        - containerPort: 443
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /config  # For SSL certificates
+          name: swag-config
+      volumes:
+      - name: swag-config
+        persistentVolumeClaim:
+          claimName: swag-config-pvc
