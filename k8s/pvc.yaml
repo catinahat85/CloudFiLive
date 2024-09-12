@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: swag-config-pv
+spec:
+  capacity:
+    storage: 5Gi  # Adjust storage size as needed
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/swag-config  # Path on the node where data will be stored
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: swag-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
