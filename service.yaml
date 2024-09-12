@@ -5,9 +5,8 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: static-site
+    app: my-nginx-app
   ports:
   - protocol: TCP
     port: 80
     targetPort: 80
-
