@@ -18,5 +18,5 @@ spec:
         ports:
         - containerPort: 80
         - containerPort: 443
-
+        imagePullPolicy: Always  # Always pull the latest image from DockerHub
 
