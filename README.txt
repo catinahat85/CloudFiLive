@@ -1,5 +1,5 @@
 Don't understand what you're looking at? It's ok, read the high level walkthrough here:
-[My Personal Project Walkthrough](https://github.com/catinahat85/GitGudAtCloudNative/blob/main/My%20Personal%20Project.MD)
+https://github.com/catinahat85/GitGudAtCloudNative/blob/main/My%20Personal%20Project.MD
 
 For now, here is the license info for the website template I used. Feel free to fork.
 
