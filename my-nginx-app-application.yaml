@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-nginx-app
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/write-back-target: 'branch:argo'
+    argocd-image-updater.argoproj.io/image-list: my-nginx-app=jakehazex21/my-nginx-app
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/catinahat85/CloudFiLive.git'
+    targetRevision: 'argo'  # This specifies the 'argo' branch
+    path: '.'
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'default'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
