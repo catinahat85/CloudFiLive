@@ -1,19 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  name: my-nginx-app
   annotations:
     argocd-image-updater.argoproj.io/image-list: my-nginx-app=jakehazex21/my-nginx-app
     argocd-image-updater.argoproj.io/image-kustomize: my-nginx-app=jakehazex21/my-nginx-app
     argocd-image-updater.argoproj.io/write-back-method: git
-    argocd-image-updater.argoproj.io/write-back-target: 'branch:argo'
+    argocd-image-updater.argoproj.io/write-back-target: 'branch:main'
     argocd-image-updater.argoproj.io/my-nginx-app.update-strategy: alphabetical
 spec:
   project: default
   source:
     repoURL: 'https://github.com/catinahat85/CloudFiLive.git'
-    targetRevision: 'argo'
-    path: '.'
-    **kustomize: {}**
+    targetRevision: 'main'  # Pointing to the main branch
+    path: '.'               # Path to kustomization.yaml in the root directory
+    kustomize: {}
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: 'default'
