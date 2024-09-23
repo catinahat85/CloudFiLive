@@ -11,8 +11,9 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/catinahat85/CloudFiLive.git'
-    targetRevision: 'argo'  # This specifies the 'argo' branch
+    targetRevision: 'argo'
     path: '.'
+    **kustomize: {}**
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: 'default'
