@@ -1,5 +1,5 @@
 # Use the official Nginx image to serve the static site
-FROM nginx:alpine
+FROM nginx:1-alpine-slim
 
 # Copy static files into the Nginx web directory
 COPY . /usr/share/nginx/html
