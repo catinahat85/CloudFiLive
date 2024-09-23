@@ -1,14 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-nginx-app
-  namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: my-nginx-app=jakehazex21/my-nginx-app
     argocd-image-updater.argoproj.io/image-kustomize: my-nginx-app=jakehazex21/my-nginx-app
     argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/write-back-target: 'branch:argo'
-    argocd-image-updater.argoproj.io/my-nginx-app.update-strategy: latest
+    argocd-image-updater.argoproj.io/my-nginx-app.update-strategy: name
 spec:
   project: default
   source:
