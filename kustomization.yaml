@@ -5,4 +5,4 @@ resources:
   - service.yaml
 images:
   - name: jakehazex21/my-nginx-app
-    newTag: ${IMAGE_TAG}  # This will be replaced by the Image Updater
+    newTag: v1.0.0  # This will be replaced by the Image Updater
