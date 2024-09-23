@@ -25,7 +25,11 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
-    # Step 4: Build and push the Docker image to Docker Hub (multi-platform build)
+    # Step 4: Set the Image Tag using the Git Commit SHA
+    - name: Set Image Tag
+      run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+    # Step 5: Build and push the Docker image to Docker Hub (multi-platform build)
     - name: Build and push Docker image to Docker Hub
       uses: docker/build-push-action@v4
       with:
@@ -40,6 +44,6 @@ jobs:
         docker pull jakehazex21/swag:latest
         docker run -d -p 80:80 -p 443:443 --name swag jakehazex21/swag
 
-    # Step 5: Log out from Docker Hub
+    # Step 6: Log out from Docker Hub
     - name: Log out from Docker Hub
       run: docker logout
