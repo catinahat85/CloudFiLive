@@ -29,6 +29,7 @@ jobs:
     - name: Set Image Tag
       run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
+
     # Step 5: Build and push the Docker image to Docker Hub (multi-platform build)
     - name: Build and push Docker image to Docker Hub
       uses: docker/build-push-action@v4
@@ -37,7 +38,9 @@ jobs:
         file: ./Dockerfile
         platforms: linux/amd64,linux/arm64  # Ensure multi-platform builds
         push: true
-        tags: jakehazex21/my-nginx-app:latest  # Replace with your Docker Hub image tag
+        tags: |
+          jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}
+          jakehazex21/my-nginx-app:latest  # Optional: Keep latest if desired
 
     - name: Deploy SWAG (from DockerHub)
       run: |
