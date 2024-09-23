@@ -26,8 +26,8 @@ jobs:
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
     # Step 4: Set the Image Tag using the Git Commit SHA
-    - name: Set Image Tag
-      run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
+    - name: Set image tag
+      run: echo "IMAGE_TAG=$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
 
 
     # Step 5: Build and push the Docker image to Docker Hub (multi-platform build)
