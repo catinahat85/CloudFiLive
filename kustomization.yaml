@@ -3,3 +3,6 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+images:
+  - name: jakehazex21/my-nginx-app
+    newTag: latest  # Initial tag, will be updated by Image Updater
