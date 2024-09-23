@@ -40,7 +40,6 @@ jobs:
         push: true
         tags: |
           jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}
-          jakehazex21/my-nginx-app:latest
 
     - name: Deploy SWAG (from DockerHub)
       run: |
