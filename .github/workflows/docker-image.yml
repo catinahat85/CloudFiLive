@@ -25,10 +25,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
-    # Step 4: Set the Image Tag using the Git Commit SHA
+    # Step 4: Set the Image Tag using the current date and time (for unique versioning)
     - name: Set image tag
       run: echo "IMAGE_TAG=$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
-
 
     # Step 5: Build and push the Docker image to Docker Hub (multi-platform build)
     - name: Build and push Docker image to Docker Hub
@@ -39,13 +38,15 @@ jobs:
         platforms: linux/amd64,linux/arm64  # Ensure multi-platform builds
         push: true
         tags: |
-          jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}
+          jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}  # Timestamp tag
+          jakehazex21/my-nginx-app:latest  # Latest tag
 
+    # Step 6: Deploy SWAG (from DockerHub)
     - name: Deploy SWAG (from DockerHub)
       run: |
         docker pull jakehazex21/swag:latest
         docker run -d -p 80:80 -p 443:443 --name swag jakehazex21/swag
 
-    # Step 6: Log out from Docker Hub
+    # Step 7: Log out from Docker Hub
     - name: Log out from Docker Hub
       run: docker logout
