@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - jakehazex21/my-nginx-app:latest
