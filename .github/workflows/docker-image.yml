@@ -35,10 +35,10 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
-        platforms: linux/amd64,linux/arm64  # Ensure multi-platform builds
+        platforms: linux/amd64,linux/arm64
         push: true
         tags: |
-          jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}  # Dynamically generated tag based on date
+          jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}
           jakehazex21/my-nginx-app:latest  # Static latest tag
 
     # Step 6: Deploy SWAG (from DockerHub)
