@@ -38,8 +38,8 @@ jobs:
         platforms: linux/amd64,linux/arm64  # Ensure multi-platform builds
         push: true
         tags: |
-          jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}  # Timestamp tag
-          jakehazex21/my-nginx-app:latest  # Latest tag
+          jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}  # Dynamically generated tag based on date
+          jakehazex21/my-nginx-app:latest  # Static latest tag
 
     # Step 6: Deploy SWAG (from DockerHub)
     - name: Deploy SWAG (from DockerHub)
