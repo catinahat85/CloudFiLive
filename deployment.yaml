@@ -12,7 +12,7 @@ spec:
       labels:
         app: my-nginx-app
       annotations:
-        redeploy-timestamp: "2024-09-26T21:10:36"  # Add a unique timestamp to trigger a redeploy
+        redeploy-timestamp: "2024-09-26T21:18:21"  # Add a unique timestamp to trigger a redeploy
     spec:
       containers:
       - name: my-nginx-app
