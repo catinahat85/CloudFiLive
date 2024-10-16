@@ -20,16 +20,13 @@ spec:
         image: ghost:5.72.0
         ports:
         - containerPort: 2368
-        volumeMounts:
-        - name: ghost-content
-          mountPath: /var/lib/ghost/content
         env:
           - name: database__client
             value: mysql
           - name: database__connection__host
             value: your-mysql-host
           - name: database__connection__user
-            value: your-db-user
+            value: your-mysql-user
           - name: database__connection__password
             valueFrom:
               secretKeyRef:
@@ -42,26 +39,12 @@ spec:
           - name: debug
             value: "false"
           - name: url
-            value: https://your-domain.com
-          - name: mail__transport
-            value: SMTP
-          - name: mail__from
-            value: admin@your-domain.com
-          - name: mail__options__service
-            value: SMTP
-          - name: mail__options__host
-            value: smtp.sendgrid.net
-          - name: mail__options__port
-            value: "587"
-          - name: mail__options__auth__user
-            value: apikey
-          - name: mail__options__auth__pass
-            valueFrom:
-              secretKeyRef:
-                name: ghost-app-secrets
-                key: smtp-password
+            value: http://5.78.119.50/ghost
+        volumeMounts:
+        - name: ghost-content
+          mountPath: /var/lib/ghost/content
       volumes:
       - name: ghost-content
         persistentVolumeClaim:
-          claimName: ghost-content-pvc  # This PVC must be created separately
+          claimName: ghost-content-pvc  # Your PVC claim for content
 
