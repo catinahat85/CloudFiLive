@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ghost-app
+  namespace: ghost
   labels:
     app: ghost-app
 spec:
@@ -17,30 +18,50 @@ spec:
       containers:
       - name: ghost-app
         image: ghost:5.72.0
-        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 2368
         volumeMounts:
         - name: ghost-content
           mountPath: /var/lib/ghost/content
         env:
-        - name: database__client
-          value: mysql
-        - name: database__connection__host
-          value: <your-mysql-host>
-        - name: database__connection__user
-          value: ghost
-        - name: database__connection__password
-          valueFrom:
-            secretKeyRef:
-              name: ghost-app-secrets
-              key: mysql-password
-        - name: database__connection__database
-          value: ghost
-        - name: useNullAsDefault
-          value: "true"
-        - name: url
-          value: https://your-blog-url.com
-        - name: mail__transport
-          value: SMTP
-        - name: mail__options__
+          - name: database__client
+            value: mysql
+          - name: database__connection__host
+            value: your-mysql-host
+          - name: database__connection__user
+            value: your-db-user
+          - name: database__connection__password
+            valueFrom:
+              secretKeyRef:
+                name: ghost-app-secrets
+                key: mysql-password
+          - name: database__connection__database
+            value: ghost
+          - name: useNullAsDefault
+            value: "true"
+          - name: debug
+            value: "false"
+          - name: url
+            value: https://your-domain.com
+          - name: mail__transport
+            value: SMTP
+          - name: mail__from
+            value: admin@your-domain.com
+          - name: mail__options__service
+            value: SMTP
+          - name: mail__options__host
+            value: smtp.sendgrid.net
+          - name: mail__options__port
+            value: "587"
+          - name: mail__options__auth__user
+            value: apikey
+          - name: mail__options__auth__pass
+            valueFrom:
+              secretKeyRef:
+                name: ghost-app-secrets
+                key: smtp-password
+      volumes:
+      - name: ghost-content
+        persistentVolumeClaim:
+          claimName: ghost-content-pvc  # This PVC must be created separately
+
