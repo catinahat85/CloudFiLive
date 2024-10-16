@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ghost-ingress
+  namespace: ghost
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: "5.78.119.50"  # Use your server's external IP
+    http:
+      paths:
+      - path: /ghost
+        pathType: Prefix
+        backend:
+          service:
+            name: ghost-app-service  # Name of the Ghost service
+            port:
+              number: 80
