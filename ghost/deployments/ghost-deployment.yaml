@@ -26,7 +26,7 @@ spec:
           - name: database__connection__host
             value: ghost-mysql
           - name: database__connection__user
-            value: your-mysql-user
+            value: root  # Replace with actual user if not root
           - name: database__connection__password
             valueFrom:
               secretKeyRef:
@@ -39,12 +39,13 @@ spec:
           - name: debug
             value: "false"
           - name: url
-            value: http://5.78.119.50/ghost
+            value: http://5.78.119.50/ghost  # Adjust this to match your blog's URL
         volumeMounts:
         - name: ghost-content
           mountPath: /var/lib/ghost/content
       volumes:
       - name: ghost-content
         persistentVolumeClaim:
-          claimName: ghost-content-pvc  # Your PVC claim for content
+          claimName: ghost-content-pvc
+
 
