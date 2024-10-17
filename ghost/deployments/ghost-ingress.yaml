@@ -4,7 +4,7 @@ metadata:
   name: ghost-ingress
   namespace: ghost
   annotations:
-    kubernetes.io/ingress.class: traefik # Use your ingress class (e.g., traefik or nginx)
+    kubernetes.io/ingress.class: traefik # Or whichever ingress class you're using
 spec:
   rules:
   - http:
@@ -16,7 +16,4 @@ spec:
             name: ghost-service
             port:
               number: 80
-  tls:
-  - hosts:
-    - <your-domain-here>  # This can stay for when you add a domain later. 
-    secretName: tls-secret # Optional: use a TLS secret for HTTPS if required
+  # Omit TLS for now if using IP
