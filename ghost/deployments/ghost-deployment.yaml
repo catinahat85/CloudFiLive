@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+  apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ghost-app
@@ -24,7 +24,7 @@ spec:
           - name: database__client
             value: mysql
           - name: database__connection__host
-            value: your-mysql-host
+            value: ghost-mysql
           - name: database__connection__user
             value: your-mysql-user
           - name: database__connection__password
