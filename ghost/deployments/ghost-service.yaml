@@ -7,7 +7,7 @@ spec:
   selector:
     app: ghost-app
   ports:
-  - port: 2368
-    targetPort: 2368
-    protocol: TCP
+    - protocol: TCP
+      port: 8080      # Change the port here
+      targetPort: 2368
   type: ClusterIP
