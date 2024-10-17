@@ -7,12 +7,17 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
 spec:
   rules:
-  - http:
+  - host: beatsinthe.cloud 
+    http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: my-nginx-app  # Ensure this matches your service name
+            name: y-nginx-app  
             port:
-              number: 80  # The port your service is listening on
+              number: 80  
+  tls:
+  - hosts:
+    - beatsinthe.cloud  
+    secretName: cloudfi-tls-secret  
