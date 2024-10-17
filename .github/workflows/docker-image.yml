@@ -41,11 +41,6 @@ jobs:
           jakehazex21/my-nginx-app:${{ env.IMAGE_TAG }}
           jakehazex21/my-nginx-app:latest
 
-    # Step 6: Deploy SWAG (from DockerHub)
-    - name: Deploy SWAG (from DockerHub)
-      run: |
-        docker pull jakehazex21/swag:latest
-        docker run -d -p 80:80 -p 443:443 --name swag jakehazex21/swag
 
     # Step 7: Log out from Docker Hub
     - name: Log out from Docker Hub
