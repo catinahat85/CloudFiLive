@@ -19,5 +19,6 @@ spec:
               number: 80  
   tls:
   - hosts:
-    - beatsinthe.cloud  
+    - beatsinthe.cloud 
+    - www.beatsinthe.cloud
     secretName: cloudfi-tls-secret  
