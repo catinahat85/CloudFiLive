@@ -4,7 +4,7 @@ metadata:
   name: ghost-ingress
   namespace: ghost
   annotations:
-    kubernetes.io/ingress.class: traefik # Or whichever ingress class you're using
+    kubernetes.io/ingress.class: traefik  # Update this based on your ingress class
 spec:
   rules:
   - http:
@@ -15,5 +15,4 @@ spec:
           service:
             name: ghost-service
             port:
-              number: 80
-  # Omit TLS for now if using IP
+              number: 2368  # Assuming the Ghost service port is 2368
