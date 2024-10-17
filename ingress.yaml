@@ -14,7 +14,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: y-nginx-app  
+            name: my-nginx-app  
             port:
               number: 80  
   tls:
