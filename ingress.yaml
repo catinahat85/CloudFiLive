@@ -7,7 +7,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
 spec:
   rules:
-  - host: beatsinthe.cloud
+  - host: easeintok8s.cloud
     http:
       paths:
       - path: /
@@ -17,7 +17,7 @@ spec:
             name: my-nginx-app
             port:
               number: 80
-  - host: www.beatsinthe.cloud
+  - host: www.easeintok8s.cloud
     http:
       paths:
       - path: /
@@ -29,6 +29,6 @@ spec:
               number: 80
   tls:
   - hosts:
-    - beatsinthe.cloud
-    - www.beatsinthe.cloud
+    - easeintok8s.cloud
+    - www.easeintok8s.cloud
     secretName: cloudfi-tls-secret
