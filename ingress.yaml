@@ -17,6 +17,13 @@ spec:
             name: my-nginx-app
             port:
               number: 80
+      - path: /blog
+        pathType: Prefix
+        backend:
+          service:
+            name: ghost-app-service  # Name of your Ghost service
+            port:
+              number: 2368  # Ghost runs on port 2368 by default
   - host: www.easeintok8s.cloud
     http:
       paths:
@@ -27,6 +34,13 @@ spec:
             name: my-nginx-app
             port:
               number: 80
+      - path: /blog
+        pathType: Prefix
+        backend:
+          service:
+            name: ghost-app-service  # Same Ghost service
+            port:
+              number: 2368
   tls:
   - hosts:
     - easeintok8s.cloud
