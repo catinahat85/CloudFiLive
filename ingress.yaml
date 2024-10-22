@@ -7,7 +7,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
 spec:
   rules:
-  - host: easeintok8s.cloud
+  - host: beatsinthe.cloud
     http:
       paths:
       - path: /
@@ -24,7 +24,7 @@ spec:
             name: ghost-app-service  # Name of your Ghost service
             port:
               number: 80  # Ghost runs on port 2368 by default
-  - host: www.easeintok8s.cloud
+  - host: www.beatsinthe.cloud
     http:
       paths:
       - path: /
@@ -43,6 +43,6 @@ spec:
               number: 80
   tls:
   - hosts:
-    - easeintok8s.cloud
-    - www.easeintok8s.cloud
+    - beatsinthe.cloud
+    - www.beatsinthe.cloud
     secretName: cloudfi-tls-secret
