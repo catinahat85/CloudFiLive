@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghost-db
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ghost-db
+  template:
+    metadata:
+      labels:
+        app: ghost-db
+    spec:
+      containers:
+      - name: ghost-db
+        image: jakehazex21/ubuntu-db-1
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+      imagePullSecrets:
+      - name: my-dockerhub-secret

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghost-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ghost-app
+  template:
+    metadata:
+      labels:
+        app: ghost-app
+    spec:
+      containers:
+      - name: ghost-app
+        image: jakehazex21/ubuntu-ghost-1
+        ports:
+        - containerPort: 2368
+        env:
+        - name: url
+          value: https://beatsinthe.cloud/blog  # Correct URL
+        - name: database__client
+          value: mysql
+        - name: database__connection__host
+          value: ghost-db-service 
+        - name: database__connection__user
+          value: root  
+        - name: database__connection__password
+          value: password 
+        - name: database__connection__database
+          value: ghost  
+      imagePullSecrets:
+      - name: my-dockerhub-secret
