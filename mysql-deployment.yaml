@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ghost-db
-  namespace: ghost
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -22,4 +22,4 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           value: password
       imagePullSecrets:
-      - name: my-dockerhub-secret-ghost
+      - name: my-dockerhub-secret
