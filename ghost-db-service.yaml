@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ghost-db-service
+  namespace: ghost  # Add this line
 spec:
   selector:
     app: ghost-db
