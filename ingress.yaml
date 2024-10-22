@@ -5,6 +5,7 @@ metadata:
   namespace: default  # Assuming the ingress is in the 'default' namespace
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
   rules:
   - host: beatsinthe.cloud
