@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ghost-app
-  namespace: default
+  namespace: ghost
 spec:
   replicas: 1
   selector:
@@ -32,4 +32,4 @@ spec:
         - name: database__connection__database
           value: ghost  
       imagePullSecrets:
-      - name: my-dockerhub-secret
+      - name: my-dockerhub-secret-ghost
