@@ -23,7 +23,7 @@ spec:
           service:
             name: ghost-app-service  # Name of your Ghost service
             port:
-              number: 2368  # Ghost runs on port 2368 by default
+              number: 80  # Ghost runs on port 2368 by default
   - host: www.easeintok8s.cloud
     http:
       paths:
@@ -40,7 +40,7 @@ spec:
           service:
             name: ghost-app-service  # Same Ghost service
             port:
-              number: 2368
+              number: 80
   tls:
   - hosts:
     - easeintok8s.cloud
