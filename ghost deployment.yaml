@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: ghost-app
   namespace: default
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false  # Prevent ArgoCD from pruning this deployment
 spec:
   replicas: 1
   selector:
@@ -26,9 +28,15 @@ spec:
         - name: database__connection__host
           value: ghost-db-service 
         - name: database__connection__user
-          value: root  
+          valueFrom:
+            secretKeyRef:
+              name: ghost-db-secret
+              key: db_user  # Reference secret for the database user
         - name: database__connection__password
-          value: password 
+          valueFrom:
+            secretKeyRef:
+              name: ghost-db-secret
+              key: db_password  # Reference secret for the database password
         - name: database__connection__database
           value: ghost  
       imagePullSecrets:
