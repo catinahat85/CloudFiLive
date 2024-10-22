@@ -22,4 +22,4 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           value: password
       imagePullSecrets:
-      - name: my-dockerhub-secret
+      - name: my-dockerhub-secret-ghost
