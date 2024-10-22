@@ -19,6 +19,8 @@ spec:
         ports:
         - containerPort: 2368
         env:
+        - name: url
+          value: https://easeintok8s.cloud/blog  # Correct URL
         - name: database__client
           value: mysql
         - name: database__connection__host
@@ -30,4 +32,4 @@ spec:
         - name: database__connection__database
           value: ghost  
       imagePullSecrets:
-      - name: my-dockerhub-secret  
+      - name: my-dockerhub-secret
