@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: ghost-db
   namespace: default
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false  # Prevent ArgoCD from pruning this deployment
 spec:
   replicas: 1
   selector:
@@ -20,6 +22,9 @@ spec:
         - containerPort: 3306
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: password
+          valueFrom:
+            secretKeyRef:
+              name: ghost-db-secret
+              key: db_password  # Use the secret for the MySQL root password
       imagePullSecrets:
       - name: my-dockerhub-secret
