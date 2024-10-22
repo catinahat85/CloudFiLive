@@ -20,7 +20,7 @@ spec:
         - containerPort: 2368
         env:
         - name: url
-          value: https://easeintok8s.cloud/blog  # Correct URL
+          value: https://beatsinthe.cloud/blog  # Correct URL
         - name: database__client
           value: mysql
         - name: database__connection__host
