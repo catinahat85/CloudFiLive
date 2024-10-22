@@ -23,7 +23,6 @@ spec:
         backend:
           service:
             name: ghost-app-service
-            namespace: default  # Explicitly reference the ghost namespace
             port:
               number: 80  # Port 80 if you're exposing Ghost via service at 80
   - host: www.beatsinthe.cloud
@@ -41,7 +40,6 @@ spec:
         backend:
           service:
             name: ghost-app-service
-            namespace: default  # Explicitly reference the ghost namespace
             port:
               number: 80
   tls:
