@@ -12,12 +12,14 @@ spec:
       labels:
         app: my-nginx-app
       annotations:
-        redeploy-timestamp: "2024-10-17T21:11:11"  # Add a unique timestamp to trigger a redeploy
+        redeploy-timestamp: "2024-10-21T21:19:27" 
     spec:
       containers:
       - name: my-nginx-app
-        image: jakehazex21/my-nginx-app:latest  # Docker Hub image
+        image: jakehazex21/my-nginx-app:latest  
         ports:
         - containerPort: 80
         - containerPort: 443
-        imagePullPolicy: Always  # Always pull the latest image from DockerHub
+        imagePullPolicy: Always 
+      imagePullSecrets:  # Secret to pull private images from DockerHub
+      - name: my-dockerhub-secret
