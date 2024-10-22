@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-ingress
-  namespace: default
+  namespace: default  # Assuming the ingress is in the 'default' namespace
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
 spec:
@@ -21,9 +21,10 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: ghost-app-service  # Name of your Ghost service
+            name: ghost-app-service
+            namespace: ghost  # Explicitly reference the ghost namespace
             port:
-              number: 80  # Ghost runs on port 2368 by default
+              number: 80  # Port 80 if you're exposing Ghost via service at 80
   - host: www.beatsinthe.cloud
     http:
       paths:
@@ -38,7 +39,8 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: ghost-app-service  # Same Ghost service
+            name: ghost-app-service
+            namespace: ghost  # Explicitly reference the ghost namespace
             port:
               number: 80
   tls:
