@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: self-managed-argocd
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  source:
+    path: argo-cd           # Folder in your GitHub repo containing Argo CD manifests
+    repoURL: https://github.com/catinahat85/CloudFiLive.git
+    targetRevision: main     # Specify the branch name
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
