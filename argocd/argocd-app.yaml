@@ -8,9 +8,9 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   source:
-    path: argo-cd 
+    path: CloudFiLive/argocd 
     repoURL: https://github.com/catinahat85/CloudFiLive.git
-    targetRevision: main 
+    targetRevision: main
   project: default
   syncPolicy:
     automated:
