@@ -12,7 +12,7 @@ spec:
       labels:
         app: my-nginx-app
       annotations:
-        redeploy-timestamp: "2024-10-27T21:01:05" 
+        redeploy-timestamp: "2024-10-31T21:21:03" 
     spec:
       containers:
       - name: my-nginx-app
