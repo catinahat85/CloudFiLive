@@ -11,7 +11,7 @@ spec:
   - host: beatsinthe.cloud
     http:
       paths:
-      - path: /argo   # Adjust the path if you want Argo CD accessible at a different URL
+      - path: /argo 
         pathType: Prefix
         backend:
           service:
