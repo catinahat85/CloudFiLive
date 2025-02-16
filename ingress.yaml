@@ -48,4 +48,4 @@ spec:
   - hosts:
     - beatsinthe.cloud
     - www.beatsinthe.cloud
-    secretName: cloudfi-tls-secret
+    secretName: new-cloudfi-tls-secret
