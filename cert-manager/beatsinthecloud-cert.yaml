@@ -6,9 +6,9 @@ metadata:
 spec:
   secretName: cloudfi-tls-secret
   issuerRef:
-    name: letsencrypt-production 
-    kind: ClusterIssuer         
-  commonName: beatsinthe.cloud  
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: beatsinthe.cloud
   dnsNames:
   - beatsinthe.cloud
   - www.beatsinthe.cloud
