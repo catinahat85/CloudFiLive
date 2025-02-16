@@ -4,7 +4,7 @@ metadata:
   name: cloudfi-tls
   namespace: default
 spec:
-  secretName: cloudfi-tls-secret
+  secretName: new-cloudfi-tls-secret
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
